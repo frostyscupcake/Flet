@@ -5,9 +5,6 @@ import os
 
 def download(URL = f"https://www.youtube.com/watch?v=dQw4w9WgXcQ", video_format="MP4", folder_dir= os.path.dirname(__file__)):
     video = YouTube(URL)
-    #available_itags = [stream.itag for stream in video.streams]
-    #print("Available itags:", available_itags)
-
     print(folder_dir)
     if video_format == "MP4":
         st = video.streams.get_by_itag(22)
@@ -18,12 +15,16 @@ def download(URL = f"https://www.youtube.com/watch?v=dQw4w9WgXcQ", video_format=
 
     st.download(output_path=folder_dir)
 
-
-
 def main(page):
     text = ft.Text()
+    title = ft.Text(value="Meovv", size=60, weight=ft.FontWeight.BOLD, text_align="CENTER")
+    sub_title = ft.Text(value="Youtube Downloader", size=30, text_align="CENTER")
     progress = ft.Text()
     file_picker = ft.FilePicker()
+
+    page.window_width = 400  
+    page.window_height = 600      
+    page.window_resizable = False
 
     def btn_click(e):
         if not txt_name.value:
@@ -52,7 +53,7 @@ def main(page):
 
     file_picker = ft.FilePicker(on_result=on_dialog_result)
     txt_name = ft.TextField(label="Enter the URL")
-    page.add(txt_name)
+    page.add(title, sub_title, txt_name)
 
     cg = ft.RadioGroup(content=ft.Column([
         ft.Radio(value="MP3", label="MP3"),
@@ -64,6 +65,5 @@ def main(page):
     curr_Dir = ft.Text()
     submit_button = ft.ElevatedButton("Download", on_click=btn_click)
 
-    page.add(ft.Text("Choose download option:"), cg, getDir_button, curr_Dir, submit_button, text, progress)
-
+    page.add(ft.Text("Choose download option:"), cg, getDir_button, submit_button, curr_Dir, text, progress)
 ft.app(target=main)
