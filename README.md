@@ -1,3 +1,4 @@
+<img src='Meovv/Thumbnail.png'>
 # MEOVV Youtube Downloader
 
 This project was made using the FLET and Pytube API. This app allows you to download Youtube videos either in MP4 format or MP3 format at your desired directory.
